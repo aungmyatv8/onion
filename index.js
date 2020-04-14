@@ -8,6 +8,7 @@ app.use(express.json());
 
 app.post("/start", async (req, res) => {
   try {
+    console.log("this start", req.body["messenger user id"]);
     console.log(req.body);
   } catch (e) {}
 });
