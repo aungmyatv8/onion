@@ -25,6 +25,10 @@ exports.addProducts = async (req, res) => {
               title: "Add Product",
               block_names: ["add_product"],
             },
+            {
+              title: "Find Product",
+              block_names: ["find Products"],
+            },
           ],
         },
       ],
@@ -85,6 +89,52 @@ exports.getProduct = async (req, res) => {
   } catch (e) {
     res.json({
       messages: [{ text: "Error Occurs in find products" }],
+    });
+  }
+};
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndDelete(req.body.id);
+    if (!product) {
+      res.json({
+        messages: [
+          {
+            text: "Error occured.Cannot delete. What do you want to do next?",
+            quick_replies: [
+              {
+                title: "Add Product",
+                block_names: ["add_product"],
+              },
+              {
+                title: "Find Product",
+                block_names: ["find Products"],
+              },
+            ],
+          },
+        ],
+      });
+    }
+    res.json({
+      messages: [
+        {
+          text: "Delete Successful. What do you want to do next?",
+          quick_replies: [
+            {
+              title: "Add Product",
+              block_names: ["add_product"],
+            },
+            {
+              title: "Find Product",
+              block_names: ["find Products"],
+            },
+          ],
+        },
+      ],
+    });
+  } catch (e) {
+    res.json({
+      messages: [{ text: "Error Occurs in deleting products" }],
     });
   }
 };
