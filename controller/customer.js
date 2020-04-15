@@ -95,9 +95,8 @@ exports.buyProducts = async (req, res) => {
 
 exports.getOrder = async (req, res) => {
   try {
-    console.log(req.body);
     const userId = req.body["messenger user id"];
-    console.log(userId);
+
     const products = await Order.find({
       userId: userId,
     });
