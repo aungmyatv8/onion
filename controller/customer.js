@@ -13,8 +13,8 @@ exports.getAllProducts = async (req, res) => {
         buttons: [
           {
             type: "show_block",
-            block_names: ["Buy"],
-            title: "buy",
+            block_names: ["buy"],
+            title: "Buy",
             set_attributes: {
               id: product._id,
             },
