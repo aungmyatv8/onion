@@ -25,7 +25,7 @@ app.post("/start", async (req, res) => {
     if (userId == "2894754003949265") {
       console.log("this done");
       res.json({
-        redirect_to_blocks: ["Get Start"],
+        redirect_to_blocks: ["admin"],
       });
     } else {
     }
