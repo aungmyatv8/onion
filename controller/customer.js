@@ -95,13 +95,15 @@ exports.buyProducts = async (req, res) => {
 
 exports.getOrder = async (req, res) => {
   try {
-    const products = await Order.find();
+    const products = await Order.find({
+      userId: req.body["messenger user id"],
+    });
 
     const elements = products.map((product) => {
       const newproduct = {
-        title: `Name: ${product.name}`,
-        image_url: product.photo,
-        subtitle: `Price: ${product.price}`,
+        title: `Name: ${product.product.name}`,
+        image_url: product.product.photo,
+        subtitle: `Price: ${product.product.price}`,
         buttons: [
           {
             type: "show_block",
