@@ -101,6 +101,26 @@ exports.getOrder = async (req, res) => {
       userId: userId,
     });
 
+    if (products.length == 0) {
+      return res.json({
+        messages: [
+          {
+            text: "There is no order. What do you want to do next? ",
+            quick_replies: [
+              {
+                title: "buy",
+                block_names: ["all products"],
+              },
+              {
+                title: "မှာထားတဲ့order",
+                block_names: ["order"],
+              },
+            ],
+          },
+        ],
+      });
+    }
+
     const elements = products.map((product) => {
       const newproduct = {
         title: `Name: ${product.product.name}`,
