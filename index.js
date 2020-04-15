@@ -15,6 +15,7 @@ mongoose
   });
 
 const admin = require("./routes/admin");
+const customer = require("./routes/customer");
 
 // const customer =
 
@@ -34,11 +35,15 @@ app.post("/start", async (req, res) => {
         redirect_to_blocks: ["admin"],
       });
     } else {
+      res.json({
+        redirect_to_blocks: ["customer"],
+      });
     }
   } catch (e) {}
 });
 
 app.use("/admin", admin);
+app.use("/customer", customer);
 
 app.listen(port, () => {
   console.log(`server is listening`);

@@ -3,7 +3,7 @@ const Product = require("../models/product");
 exports.addProducts = async (req, res) => {
   try {
     const { name, type, price, photo } = req.body;
-    console.log(req.body);
+
     const product = await Product.create({
       name,
       type,
@@ -43,7 +43,6 @@ exports.addProducts = async (req, res) => {
 exports.getProduct = async (req, res) => {
   try {
     const products = await Product.find();
-    console.log(products);
 
     const elements = products.map((product) => {
       const newproduct = {
@@ -95,7 +94,6 @@ exports.getProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   try {
-    console.log("id", req.body.id);
     const product = await Product.findByIdAndDelete(req.body.id);
     if (!product) {
       res.json({
