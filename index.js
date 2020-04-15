@@ -19,6 +19,11 @@ const admin = require("./routes/admin");
 // const customer =
 
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 app.post("/start", async (req, res) => {
   try {
