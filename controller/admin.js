@@ -35,3 +35,56 @@ exports.addProducts = async (req, res) => {
     });
   }
 };
+
+exports.getProduct = async (req, res) => {
+  try {
+    const products = await Product.find();
+    console.log(products);
+
+    const elements = products.map((product) => {
+      const newproduct = {
+        title: `Name: ${product.name}`,
+        image_url: product.photo,
+        subtitle: `Price: ${product.price}`,
+        buttons: [
+          {
+            type: "show_block",
+            block_names: ["Edit"],
+            title: "Edit",
+            set_attributes: {
+              id: product._id,
+            },
+          },
+          {
+            type: "show_block",
+            block_names: ["Delete"],
+            title: "Delete",
+            set_attributes: {
+              id: product._id,
+            },
+          },
+        ],
+      };
+      return newproduct;
+    });
+
+    res.json({
+      messages: [
+        {
+          attachment: {
+            type: "template",
+            payload: {
+              template_type: "generic",
+              image_aspect_ratio: "square",
+              elements: elements,
+            },
+          },
+        },
+      ],
+    });
+  } catch (e) {
+    res.json({
+      messages: [{ text: "Error Occurs in find products" }],
+    });
+  }
+};
