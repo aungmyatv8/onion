@@ -3,7 +3,7 @@ const Product = require("../models/product");
 exports.addProducts = async (req, res) => {
   try {
     const { name, type, price, photo } = req.body;
-    console.log(name, type, price, photo);
+    console.log(req.body);
     const product = await Product.create({
       name,
       type,
