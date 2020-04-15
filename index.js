@@ -21,7 +21,7 @@ app.use(express.json());
 app.post("/start", async (req, res) => {
   try {
     const userId = req.body["messenger user id"];
-    if (userId === "2894754003949265") {
+    if (userId == "2894754003949265") {
       res.json({
         redirect_to_blocks: ["Get Start"],
       });
