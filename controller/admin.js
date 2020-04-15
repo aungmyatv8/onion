@@ -139,3 +139,61 @@ exports.deleteProduct = async (req, res) => {
     });
   }
 };
+
+exports.editProduct = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(
+      req.body.id,
+      {
+        name: req.body.name,
+        type: req.body.type,
+        price: req.body.price,
+        photo: req.body.photo,
+      },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+    if (!product) {
+      res.json({
+        messages: [
+          {
+            text: "Error occured.Cannot Edit. What do you want to do next?",
+            quick_replies: [
+              {
+                title: "Add Product",
+                block_names: ["add_product"],
+              },
+              {
+                title: "Find Product",
+                block_names: ["find Products"],
+              },
+            ],
+          },
+        ],
+      });
+    }
+    res.json({
+      messages: [
+        {
+          text: "Edit Successful. What do you want to do next?",
+          quick_replies: [
+            {
+              title: "Add Product",
+              block_names: ["add_product"],
+            },
+            {
+              title: "Find Product",
+              block_names: ["find Products"],
+            },
+          ],
+        },
+      ],
+    });
+  } catch (e) {
+    res.json({
+      messages: [{ text: "Error Occurs in updating products" }],
+    });
+  }
+};
