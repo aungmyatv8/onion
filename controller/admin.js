@@ -95,6 +95,7 @@ exports.getProduct = async (req, res) => {
 
 exports.deleteProduct = async (req, res) => {
   try {
+    console.log("id", req.body.id);
     const product = await Product.findByIdAndDelete(req.body.id);
     if (!product) {
       res.json({
